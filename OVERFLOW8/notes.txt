@@ -1,0 +1,7 @@
+Crash point: 1800 bytes
+
+Offset: 1786
+
+Badchars: \x00\x1d\x2e\xc7\xee
+
+JMP point: 62501203
