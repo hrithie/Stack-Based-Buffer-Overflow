@@ -35,13 +35,18 @@ Restart the application in Immunity Debugger and run the modified script.
 The EIP register should now be overwritten with B's: `42424242`
 
 ## Finding Bad Characters
-Using Mona, we can generate a byte array and exclude the null byte,`\x00`, by default.
+Using Mona, we can generate a byte array and exclude the null byte,`\x00`, by default. Execute the following command:
 ```
 !mona bytearray -b "\x00"
 ```
-Execute badchars.py to generate a string of bad chars from `\x01 to \xff`. Update `exploit.py` and set the payload variable to the string created.
-Restart the application in Immunity Debugger and run the script again. Copy the address to which the ESP register points and use it in the following command:
-`!mona compare -f C:\mona\oscp\bytearray.bin -a <address>`
+Then, follow these steps:
+1. Execute `badchars.py` to generate a string of bad chars from `\x01 to \xff`.
+2. Update `exploit.py` and set the payload variable to the string created.
+3. Restart the application in Immunity Debugger and run the script again.
+4. Copy the address to which the ESP register points and use it in the following command:
+```
+!mona compare -f C:\mona\oscp\bytearray.bin -a <address>
+```
 
 A mona Memory comparison results window will appear indicating the characters that are different in memory to what they are in the generated `bytearray.bin` file.
 Not all of these might be bad characters as sometimes:
@@ -91,3 +96,4 @@ padding = "\x90" * 16
 3. Run `exploit.py`
 
 You should catch a reverse shell!
+{"mode":"full","isActive":false}
