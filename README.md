@@ -1,5 +1,5 @@
 # Stack Based Buffer Overflow Walkthrough
-I will be using `Tib3rius's Buffer Overflow Prep on TryHackMe` for practise.
+I will be using Tib3rius's Buffer Overflow Prep on TryHackMe for practise.
 Link to room: https://tryhackme.com/room/bufferoverflowprep
 
 ## Mona Configuration
@@ -19,8 +19,10 @@ Add 40 to the crash point found.
 ```
 /usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l [crash point + 40]
 ```
-Copy the output and place it in the payload variable of `exploit.py`. Run the script and it should crash the application again.
-Change the distance to the same length of the pattern you created and run the command on Immunity Debugger:
+Then,
+1. Copy the output and place it in the payload variable of `exploit.py`.
+2. Run the script and it should crash the application again.
+3. Change the distance to the same length of the pattern you created and run the command on Immunity Debugger:
 ```
 !mona findmsp -distance  [crash point + 40]
 ```
@@ -35,7 +37,8 @@ Restart the application in Immunity Debugger and run the modified script.
 The EIP register should now be overwritten with B's: `42424242`
 
 ## Finding Bad Characters
-Using Mona, we can generate a byte array and exclude the null byte,`\x00`, by default. Execute the following command:
+Using Mona, we can generate a byte array and exclude the null byte,`\x00`, by default.
+Execute the following command:
 ```
 !mona bytearray -b "\x00"
 ```
@@ -57,7 +60,8 @@ Make a note of the bad characters and do the following:
 1. Generate a new byte array in mona, specifying these new bad characters along with `\x00`
 2. Remove the new bad characters in the payload variable in exploit.py
 
-Restart the application in Immunity Debugger and run the script again. Repeat the process until the results status returns `Unmodified`. This indicates that there are no more bad characters.
+Restart the application in Immunity Debugger and run the script again.
+Repeat the process until the results status returns `Unmodified`. This indicates that there are no more bad characters.
 
 ## Finding a JMP point
 
@@ -96,4 +100,3 @@ padding = "\x90" * 16
 3. Run `exploit.py`
 
 You should catch a reverse shell!
-{"mode":"full","isActive":false}
