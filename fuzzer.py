@@ -3,8 +3,8 @@
 import socket, time, sys
 
 ip = "MACHINE_IP"
+port = MACHINE_PORT
 
-port = "MACHINE_PORT"
 timeout = 5
 prefix = "OVERFLOW1 "
 
